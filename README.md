@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # React Vitest Template
 
 A starter template for building React apps with Vite. Includes Vitest for unit testing and
@@ -83,3 +84,6 @@ Gitignore file created with [the Toptal tool](https://www.toptal.com/developers/
 ## License
 
 This project is licensed under the terms of the [MIT license](./LICENSE).
+=======
+# CS392-Tutorial
+>>>>>>> 8fdc0191d2255491eb0d0415ae0c3f64e1b2cbfa
