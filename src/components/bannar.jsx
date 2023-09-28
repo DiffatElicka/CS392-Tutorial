@@ -1,5 +1,5 @@
 const Bannar = ({schedule}) => (
-    <h1>
+    <h1 style={{textAlign: 'center'}}>
         {schedule.title}
     </h1>
   );

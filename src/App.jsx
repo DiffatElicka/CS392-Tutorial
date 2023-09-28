@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import Bannar from './components/bannar';
 import CourseList from './components/courses';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const schedule = {
   "title": "CS Courses for 2018-2019",
@@ -39,7 +41,7 @@ const schedule = {
 // );
 
 const App = () => (
-  <div>
+  <div className="container">
       <Bannar schedule={schedule}/>
       <CourseList schedule={schedule}/>
   </div>
