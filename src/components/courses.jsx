@@ -1,4 +1,8 @@
 import './courses.css';
+import { useJsonQuery } from '../utilities/fetch';
+
+// const schedule = useJsonQuery('https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php');
+
 
 const Course = ({course}) => (
     <div className='card m-1 p-2'>
@@ -16,13 +20,30 @@ const Course = ({course}) => (
 );
 
 
-const CourseList = ({schedule}) => (
-    <div className='course-list'>
+const CourseList = () => {
+
+
+    const [data, isLoading, error] = useJsonQuery('https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php');
+    if (error) return <h1>Error loading course data: {`${error}`}</h1>;
+    if (isLoading) return <h1>Loading course data...</h1>;
+    if (!data) return <h1>No course data found</h1>;
+
+    return (<div className='course-list'>
+        
         {/* <Course key = {key} course = {course}/> */}
-        {Object.entries(schedule.courses).map((course, key) => <Course key = {key} course = {course[1]}/> ) }
+        {Object.entries(data.courses).map((course, key) => <Course key = {key} course = {course[1]}/> ) }
 
-    </div>
+    </div>);
+}
+    // const [data, isLoading, error] = useJsonQuery('https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php');
 
-);
+    // <div className='course-list'>
+        
+    //     {/* <Course key = {key} course = {course}/> */}
+    //     {Object.entries(schedule.courses).map((course, key) => <Course key = {key} course = {course[1]}/> ) }
+
+    // </div>
+
+
   
   export default CourseList;
