@@ -3,10 +3,11 @@ import logo from './logo.svg';
 import './App.css';
 import Bannar from './components/bannar';
 import CourseList from './components/courses';
+import Chooser from './components/chooser';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
+import TermBar from './components/TermBar'
 
 // const App = () => (
 //   ...
@@ -16,7 +17,6 @@ const App = () => (
   <div className="container">
     <QueryClientProvider client={queryClient}>
       <Bannar/>
-      
       <CourseList/>
     </QueryClientProvider>
       
