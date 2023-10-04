@@ -5,7 +5,25 @@
     object-fit: cover;
   }
 
+
+
 .course-list {
 display: grid;
 grid-template-columns: repeat(auto-fill, 14rem);
+}
+
+.selected {
+  background-color: rgba(128, 128, 128, 0.144);
+
+}
+
+.check-mark {
+  align-content: baseline;
+  width: 10%;
+  height: 10%;
+  display: none;
+}
+
+.checked {
+  display: flex;
 }

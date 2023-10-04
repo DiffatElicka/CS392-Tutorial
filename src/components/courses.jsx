@@ -10,31 +10,35 @@ const terms = {
 // const schedule = useJsonQuery('https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php');
 
 
-const Course = ({course}) => (
-    <div className='card m-1 p-2'>
-        <div className='card-body'>
-            <h5 className='card-title' style={{fontWeight: 'bold'}}> {course.term} CS {course.number}</h5>
-            <p className='card-text'>{course.title} </p>
+const Course = ({id, course, selectedCourses, toggleSelected}) => {
+    return (
+        <div className='card m-1 p-2' onClick={() => toggleSelected(id)}>
+            <div className={`card-body ${selectedCourses.includes(id) ? 'selected' : ''}`} >
+                <h5 className='card-title' style={{fontWeight: 'bold'}}> {course.term} CS {course.number} <img src='../../dist/assets/check-mark-button-svgrepo-com.svg' className={`check-mark ${selectedCourses.includes(id) ? 'checked' : ''}`}/></h5>
+                <p className='card-text'>{course.title} </p>
+            </div>
+            <ul className="list-group list-group-flush">
+                <li className="list-group-item">{course.meets}</li>
+                
+            </ul>
+            
+        
+        
         </div>
-        <ul className="list-group list-group-flush">
-            <li className="list-group-item">{course.meets}</li>
-        </ul>
-    
-    
-    </div>
-    // console.log(course[1])
-);
+        // console.log(course[1])
+    )
+} 
 
-const CourseSelector = ({courses, selection, setSelection}) => (
+const CourseSelector = ({courses, termselection, selectedCourses, toggleSelected}) => (
     <div className="course-list">
       { 
-        courses.filter((e, i) => e[1].term == selection).map(term => <Course key={term[0]} course={term[1]} />)
+        courses.filter((e, i) => { return e[1].term == termselection}).map(term =>{;return  <Course key={term[0]} id={term[0]} course={term[1]} selectedCourses={selectedCourses} toggleSelected={toggleSelected} />})
       }
     </div>
   );
 
-const CourseList = () => {
-    const [selection, setSelection] = useState(() => Object.keys(terms)[0]);
+const CourseList = ({selectedCourses, toggleSelected}) => {
+    const [termSelection, setTermSelection] = useState(() => Object.keys(terms)[0]);
     
     const [data, isLoading, error] = useJsonQuery('https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php');
     if (error) return <h1>Error loading course data: {`${error}`}</h1>;
@@ -43,8 +47,8 @@ const CourseList = () => {
     const courses = Object.entries(data.courses);
     // console.log(courses.map((e) => e[1]));
     // console.log(courses[1]);
-    return (<div><TermBar selection={selection} setSelection={setSelection}/> 
-            <CourseSelector courses={courses} selection={selection} setSelection={setSelection}/></div>);
+    return (<div><TermBar selection={termSelection} setSelection={setTermSelection}/> 
+            <CourseSelector courses={courses} termselection={termSelection} selectedCourses={selectedCourses} toggleSelected={toggleSelected}/></div>);
 }
 
 

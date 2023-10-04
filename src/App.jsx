@@ -12,15 +12,26 @@ import TermBar from './components/TermBar'
 // const App = () => (
 //   ...
 // );
+
+
 const queryClient = new QueryClient();
-const App = () => (
-  <div className="container">
+const App = () => {
+  const [selectedCourses, setCourseSelected] = useState([]);
+
+  const toggleSelected = (item) => setCourseSelected(
+    selectedCourses.includes(item)
+    ? selectedCourses.filter(x => x !== item)
+    : [...selectedCourses, item]
+  );
+  return <div className="container">
     <QueryClientProvider client={queryClient}>
       <Bannar/>
-      <CourseList/>
+      <CourseList selectedCourses={selectedCourses} toggleSelected={toggleSelected}/>
     </QueryClientProvider>
       
   </div>
-);
+
+}
+  
 
 export default App;
