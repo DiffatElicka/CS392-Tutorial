@@ -10,6 +10,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import TermBar from './components/TermBar'
 import Modal from './components/Modal';
 import Cart from "./components/Cart"
+import isConflict from './utilities/timeconflict'
+// import { it } from 'vitest';
+
 
 // const App = () => (
 //   ...
@@ -29,12 +32,26 @@ const App = () => {
   const openModal = () => setOpen(true);
   const closeModal = () => setOpen(false);
 
-  const toggleSelected = (item) => setCourseSelected(
-    selectedCourses.includes(item)
-    ? selectedCourses.filter(x => x !== item)
-    : [...selectedCourses, item]
-  );
-  
+  const toggleSelected = (item) => {
+    
+    // timeStringToNumber(item);
+    var a = isConflict(selectedCourses, item);
+    console.log(a);
+    if(a){
+      return ;
+    }else{
+      console.log("No way!!");
+      return setCourseSelected(
+        selectedCourses.includes(item)
+        ? selectedCourses.filter(x => x !== item)
+        : [...selectedCourses, item]
+      );
+    }
+    
+    }
+
+
+  // return (selectedCourses.includes(item) ? selectedCourses.filter(x => x !== item) : [...selectedCourses, item]);
   const [termSelection, setTermSelection] = useState(() => Object.keys(terms)[0]);
 
   return <div className="container">
