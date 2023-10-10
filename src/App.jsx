@@ -11,6 +11,11 @@ import TermBar from './components/TermBar'
 import Modal from './components/Modal';
 import Cart from "./components/Cart"
 import isConflict from './utilities/timeconflict'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import CourseForm from './components/CourseForm'
+import Dispatcher from './components/Dispatcher';
+import { useJsonQuery } from './utilities/fetch';
+
 // import { it } from 'vitest';
 
 
@@ -20,52 +25,26 @@ import isConflict from './utilities/timeconflict'
 
 
 const queryClient = new QueryClient();
+
+const Data = () => {
+  const [data, isLoading, error] = useJsonQuery('https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php');
+  if (error) return <h1>Error loading course data: {`${error}`}</h1>;
+  if (isLoading) return <h1>Loading course data...</h1>;
+  if (!data) return <h1>No course data found</h1>;
+  const courses = Object.entries(data.courses);
+  // console.log(courses);
+  return <Dispatcher courses={courses}>
+
+  </Dispatcher>;
+}
+
 const App = () => {
-  const terms = {
-    Fall: '',
-    Winter: '',
-    Spring: ''
-  };
-  const [selectedCourses, setCourseSelected] = useState([]);
-  const [open, setOpen] = useState(false);
 
-  const openModal = () => setOpen(true);
-  const closeModal = () => setOpen(false);
-
-  const toggleSelected = (item) => {
-    
-    // timeStringToNumber(item);
-    var a = isConflict(selectedCourses, item);
-    console.log(a);
-    if(a){
-      return ;
-    }else{
-      console.log("No way!!");
-      return setCourseSelected(
-        selectedCourses.includes(item)
-        ? selectedCourses.filter(x => x !== item)
-        : [...selectedCourses, item]
-      );
-    }
-    
-    }
+  return <QueryClientProvider client={queryClient}>
+    <Data/>
+  </QueryClientProvider>
 
 
-  // return (selectedCourses.includes(item) ? selectedCourses.filter(x => x !== item) : [...selectedCourses, item]);
-  const [termSelection, setTermSelection] = useState(() => Object.keys(terms)[0]);
-
-  return <div className="container">
-    <QueryClientProvider client={queryClient}>
-      <Bannar/>
-      <div className='d-flex'><TermBar selection={termSelection} setSelection={setTermSelection}/> <button className="btn btn-outline-dark ms-auto" onClick={openModal} title='Carts'><i className="bi bi-cart4"></i></button>
-      <Modal open={open} close={closeModal}>
-          <Cart selected={selectedCourses} />
-      </Modal> </div>
-      
-      <CourseList selectedCourses={selectedCourses} toggleSelected={toggleSelected} termSelection={termSelection}/>
-    </QueryClientProvider>
-      
-  </div>
 
 }
   

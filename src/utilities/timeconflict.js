@@ -43,7 +43,7 @@ const isConflict = (currents, select ) => {
     // var [days, begin, end] = timeStringToNumber(select);
 
     for (const e of currents) {
-        if(areTimesConflicting(select.meets, e.meets)){
+        if(areTimesConflicting(select.meets, e.meets) && select != e){
             return true;
         }
     }

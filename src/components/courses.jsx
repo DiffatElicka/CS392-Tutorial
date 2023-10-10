@@ -2,7 +2,7 @@ import './courses.css';
 import { useJsonQuery } from '../utilities/fetch';
 import { useState } from "react";
 import TermBar from './TermBar'
-
+import { Link } from 'react-router-dom';
 
 // const terms = {
 //     Fall: '',
@@ -13,6 +13,7 @@ import TermBar from './TermBar'
 
 
 const Course = ({id, course, selectedCourses, toggleSelected}) => {
+  // console.log(id);
     return (
         <div className='card m-1 p-2' onClick={() => toggleSelected(course)}>
             <div className={`card-body ${selectedCourses.includes(course) ? 'selected' : ''}`} >
@@ -21,7 +22,7 @@ const Course = ({id, course, selectedCourses, toggleSelected}) => {
             </div>
             <ul className="list-group list-group-flush">
                 <li className="list-group-item">{course.meets}</li>
-                
+                <Link to={`/${id}/edit`}>{<i class="bi bi-pencil"></i>}</Link>
             </ul>
             
         
