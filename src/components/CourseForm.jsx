@@ -14,7 +14,13 @@ function courseFindId(courses, id) {
 }
 
 const validateUserData = (key, val) => {
-    return ''
+    switch (key) {
+        case 'title': 
+          return /(^\w\w)/.test(val) ? '' : 'must be least two characters';
+        case 'meets':
+          return /^(M?(Tu)?W?(Tr)?F?) \d{1,2}:\d{2}-\d{1,2}:\d{2}$|^$/.test(val)? '' : 'must contain XXX YY-ZZ, with XXX being valid school days in order, and YY ZZ being the beginning and the end of the class';
+        default: return '';
+      }
   };
   
   const InputField = ({name, text, state, change}) => (
@@ -44,7 +50,7 @@ const validateUserData = (key, val) => {
     const submit = (evt) => {
       evt.preventDefault();
       if (!state.errors) {
-        update(state.values);
+        // update(state.values);
       }
     };
   

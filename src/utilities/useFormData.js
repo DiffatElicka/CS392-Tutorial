@@ -12,7 +12,10 @@ export const useFormData = (validator = null, values = {}) => {
     const errors = {...state.errors, [id]: error};
     const hasError = Object.values(errors).some(x => x !== '');
     setState(hasError ? { values, errors } : { values });
+    console.log(id, value);
   };
+
+  
 
   return [state, change];
 };
