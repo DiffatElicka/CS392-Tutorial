@@ -40,14 +40,14 @@ const CourseSelector = ({courses, termselection, selectedCourses, toggleSelected
     </div>
   );
 
-const CourseList = ({selectedCourses, toggleSelected, termSelection}) => {
+const CourseList = ({selectedCourses, toggleSelected, termSelection, courses}) => {
     // const [termSelection, setTermSelection] = useState(() => Object.keys(terms)[0]);
 
-    const [data, isLoading, error] = useJsonQuery('https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php');
-    if (error) return <h1>Error loading course data: {`${error}`}</h1>;
-    if (isLoading) return <h1>Loading course data...</h1>;
-    if (!data) return <h1>No course data found</h1>;
-    const courses = Object.entries(data.courses);
+    // const [data, isLoading, error] = useJsonQuery('https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php');
+    // if (error) return <h1>Error loading course data: {`${error}`}</h1>;
+    // if (isLoading) return <h1>Loading course data...</h1>;
+    // if (!data) return <h1>No course data found</h1>;
+    // const courses = Object.entries(data.courses);
     // console.log(courses.map((e) => e[1]));
     // console.log(selectedCourses);
     return (<div>

@@ -1,6 +1,8 @@
 import { Link, useParams } from 'react-router-dom';
 // import { firstLastName } from "./User";
 import { useFormData } from '../utilities/useFormData';
+import { useDbUpdate } from '../utilities/firebase';
+import { useDbData } from '../utilities/firebase';
 
 function courseFindId(courses, id) {
     // console.log(courses);
@@ -44,13 +46,16 @@ const validateUserData = (key, val) => {
     );
   };
   
-  const UserEditor = ({course}) => {
-    // const [update, result] = useDbUpdate(`/users/${user.id}`);
+  const UserEditor = ({course, id}) => {
+    // console.log(id.id);
+    // const path = `/courses/` + id;
+    // console.log(path);
+    const [update, result] = useDbUpdate(`/courses/${id.id}`);
     const [state, change] = useFormData(validateUserData, course);
     const submit = (evt) => {
       evt.preventDefault();
       if (!state.errors) {
-        // update(state.values);
+        update(state.values);
       }
     };
   
@@ -60,7 +65,7 @@ const validateUserData = (key, val) => {
         <InputField name="title" text="Title" state={state} change={change} />
         <InputField name="number" text="Number" state={state} change={change} />
         <InputField name="meets" text="Meets" state={state} change={change} />
-        <ButtonBar message={''} />
+        <ButtonBar message={result?.message} />
       </form>
     )
   };
@@ -71,7 +76,7 @@ const CourseForm = ({ courses}) => {
     const id = useParams();
     var c = courseFindId(courses, id);
     return <div>
-    <UserEditor course={c}></UserEditor>
+    <UserEditor course={c} id={id}></UserEditor>
   </div>
 }
 

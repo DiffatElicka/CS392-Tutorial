@@ -59,7 +59,7 @@ const Dispatcher = ({courses}) => {
                 <Cart selected={selectedCourses} />
             </Modal> </div>
             
-            <CourseList selectedCourses={selectedCourses} toggleSelected={toggleSelected} termSelection={termSelection}/>
+            <CourseList selectedCourses={selectedCourses} toggleSelected={toggleSelected} termSelection={termSelection} courses={courses}/>
             </div>
         } />
         <Route path="/:id/edit" element={<CourseForm courses={courses} />} />
