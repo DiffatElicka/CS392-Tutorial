@@ -3,6 +3,7 @@ import { useJsonQuery } from '../utilities/fetch';
 import { useState } from "react";
 import TermBar from './TermBar'
 import { Link } from 'react-router-dom';
+import { useAuthState } from '../utilities/firebase';
 
 // const terms = {
 //     Fall: '',
@@ -10,7 +11,13 @@ import { Link } from 'react-router-dom';
 //     Spring: ''
 //   };
 // const schedule = useJsonQuery('https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php');
-
+const EditButton = (id) => {
+  const [user] = useAuthState();
+  if(user == null){
+    return;
+  }
+  return <Link to={`/${id}/edit`}>{<i class="bi bi-pencil"></i>}</Link>;
+}
 
 const Course = ({id, course, selectedCourses, toggleSelected}) => {
   // console.log(id);
@@ -22,7 +29,7 @@ const Course = ({id, course, selectedCourses, toggleSelected}) => {
             </div>
             <ul className="list-group list-group-flush">
                 <li className="list-group-item">{course.meets}</li>
-                <Link to={`/${id}/edit`}>{<i class="bi bi-pencil"></i>}</Link>
+                <EditButton id={id}/>
             </ul>
             
         

@@ -13,7 +13,7 @@ import Cart from "./Cart"
 import isConflict from '../utilities/timeconflict'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CourseForm from './CourseForm'
-
+import Navigation from './Navigation';
 
 
 const Dispatcher = ({courses}) => {
@@ -54,6 +54,7 @@ const Dispatcher = ({courses}) => {
         <Route path="/" element={
             <div>
             <Bannar/>
+            <Navigation/>
             <div className='d-flex'><TermBar selection={termSelection} setSelection={setTermSelection}/> <button className="btn btn-outline-dark ms-auto" onClick={openModal} title='Carts'><i className="bi bi-cart4"></i></button>
             <Modal open={open} close={closeModal}>
                 <Cart selected={selectedCourses} />
