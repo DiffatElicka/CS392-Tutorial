@@ -28,11 +28,11 @@ import { useDbData } from './utilities/firebase';
 const queryClient = new QueryClient();
 
 const Data = () => {
-  const [data, error] = useDbData('/');
+  const [data, error] = useDbData('/courses');
   if (error) return <h1>Error loading course data: {`${error}`}</h1>;
   if (data === undefined) return <h1>Loading data...</h1>;
   if (!data) return <h1>No course data found</h1>;
-  const courses = Object.entries(data.courses);
+  const courses = Object.entries(data);
   // console.log(courses);
   return <Dispatcher courses={courses}>
 

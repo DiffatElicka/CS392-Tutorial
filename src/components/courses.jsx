@@ -4,6 +4,7 @@ import { useState } from "react";
 import TermBar from './TermBar'
 import { Link } from 'react-router-dom';
 import { useAuthState } from '../utilities/firebase';
+import { useProfile } from '../utilities/profile';
 
 // const terms = {
 //     Fall: '',
@@ -12,8 +13,10 @@ import { useAuthState } from '../utilities/firebase';
 //   };
 // const schedule = useJsonQuery('https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php');
 const EditButton = (id) => {
-  const [user] = useAuthState();
-  if(user == null){
+  // const [user] = useAuthState();
+  const [profile, profileLoading, profileError] = useProfile();
+  console.log(profile)
+;  if(profile.isAdmin == null){
     return;
   }
   return <Link to={`/${id}/edit`}>{<i class="bi bi-pencil"></i>}</Link>;
