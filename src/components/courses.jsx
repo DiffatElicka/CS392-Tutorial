@@ -25,7 +25,7 @@ const EditButton = (id) => {
 const Course = ({id, course, selectedCourses, toggleSelected}) => {
   // console.log(id);
     return (
-        <div className='card m-1 p-2' onClick={() => toggleSelected(course)}>
+        <div data-cy="course" className='card m-1 p-2' onClick={() => toggleSelected(course)}>
             <div className={`card-body ${selectedCourses.includes(course) ? 'selected' : ''}`} >
                 <h5 className='card-title' style={{fontWeight: 'bold'}}> {course.term} CS {course.number} <img src='../../dist/assets/check-mark-button-svgrepo-com.svg' className={`check-mark ${selectedCourses.includes(course) ? 'checked' : ''}`}/></h5>
                 <p className='card-text'>{course.title} </p>
