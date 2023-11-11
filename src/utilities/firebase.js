@@ -45,6 +45,7 @@ if (!globalThis.EMULATION && import.meta.env.MODE === 'development') {
   
   // set flag to avoid connecting twice, e.g., because of an editor hot-reload
   globalThis.EMULATION = true;
+  console.log("Emulation");
 }
 
 export const useDbData = (path) => {
@@ -58,7 +59,8 @@ export const useDbData = (path) => {
       setError(error);
     })
   ), [ path ]);
-
+  console.log(database);
+  console.log
   return [ data, error ];
 };
 

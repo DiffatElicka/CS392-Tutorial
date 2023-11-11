@@ -14,7 +14,6 @@ grid-template-columns: repeat(auto-fill, 14rem);
 
 .selected {
   background-color: rgba(128, 128, 128, 0.144);
-
 }
 
 .check-mark {

@@ -5,6 +5,7 @@ import TermBar from './TermBar'
 import { Link } from 'react-router-dom';
 import { useAuthState } from '../utilities/firebase';
 import { useProfile } from '../utilities/profile';
+import checkMark from './check-mark-button-svgrepo-com.svg'
 
 // const terms = {
 //     Fall: '',
@@ -27,7 +28,7 @@ const Course = ({id, course, selectedCourses, toggleSelected}) => {
     return (
         <div data-cy="course" className='card m-1 p-2' onClick={() => toggleSelected(course)}>
             <div className={`card-body ${selectedCourses.includes(course) ? 'selected' : ''}`} >
-                <h5 className='card-title' style={{fontWeight: 'bold'}}> {course.term} CS {course.number} <img src='../../dist/assets/check-mark-button-svgrepo-com.svg' className={`check-mark ${selectedCourses.includes(course) ? 'checked' : ''}`}/></h5>
+                <h5 className='card-title' style={{fontWeight: 'bold'}}> {course.term} CS {course.number} <img src={checkMark} className={`check-mark ${selectedCourses.includes(course) ? 'checked' : ''}`}/></h5>
                 <p className='card-text'>{course.title} </p>
             </div>
             <ul className="list-group list-group-flush">
